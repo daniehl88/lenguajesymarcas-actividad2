@@ -1,0 +1,40 @@
+body{background-color: rgba(181, 255, 171, 0.555);}
+	#header{ position:absolute; width:30cm; height:6cm; border-color:black; border-style:solid; margin:0.5cm;}
+		#logotipo{ margin:0.5cm;height:151px; width:151px; border-style:solid; border-color:yellow; }
+			#logo { height:150px; width:150px;  }
+
+
+		#nav{border-style:solid; border-color:red; height:1.2cm;width:12.5cm; position:absolute; position:relative;left:300px; top:-140px;} 
+			#nvinicio,#nvproductos,#nvformacion,#nvcita{
+						
+						
+				height:1.15cm;
+				width:3cm;
+				font-family:comic-sans; 
+				font-size:16px; 
+				border-style:solid; 
+				border-color:black;
+				border-width:2px; 
+				background-color:#01F1F5;
+				margin:0.5px;
+			}
+
+				#nvinicio:hover,#nvproductos:hover,#nvformacion:hover,#nvcita:hover{
+					background-color:red;
+					border-color:#F5EE0B;
+					border-style:solid;
+				}
+	#contenido{}
+		
+
+
+
+	#footer{position:absolute; top:1000px; left:; border-style:solid; border-color:pink; height:4cm;width:30cm;margin:0.5cm;}
+		
+		p{position:absolute; margin:0.2cm; border-style:solid; border-color:yellow; font-size:18px; font-family:Helvetica; font-Style:italic; color:gray;}
+		
+		h6{position:Absolute; margin:0.2cm; border-style:solid; border-color:orange;top:60px;font-family:Helvetica; font-Style:bold; color:black; font-size:medium;}	
+		
+		#enlace{position:absolute; margin:0.2cm; border-style:solid; border-color:turtuoise; top:110px; width:15cm; height:24px; font-style:cursive; font-family:"Bauhaus 93"; font-size:small;}
+		
+		#licencia{position:absolute; margin:0.2cm; top:95px;}
