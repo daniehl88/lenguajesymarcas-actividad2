@@ -1,0 +1,73 @@
+<html>
+
+	<head>
+		<title> Vivero la flor de Almer&iacute;a </title>
+		<Style type="text/css">
+		@import "style.css";
+		</style>
+	<head>
+	
+	<body>
+	
+	<!-- capas principales -->
+		<div id="header">
+		
+		
+			<div id ="logotipo">
+				<img id= "logo";  src="img/logo.jpg">  
+				</img>
+			</div>
+			
+			<div id= "nav">
+				<button id="nvinicio" type = "button" >INICIO</button>
+				<button id="nvproductos" type= "button">PRODUCTOS</button>
+				<button id="nvformacion" type= "button">FORMACIÓN</button>
+				<button id="nvcita" type= "button">CITA PREVIA</button>
+			</div>
+		
+	
+		</div>
+		
+		<div id ="contenido">
+			<div id="inicio">
+			
+			
+			
+			
+			
+			
+			
+			</div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		</div>
+		
+		<div id = "footer">
+			
+			<P>LA FLOR DE ALMER&Iacute;A. 
+			Crta Aguadulce km 31,Parcela 18.</br>
+			Tel&eacute;fono:661166116. general@laflordealmeria.es</p>
+			<h6>Autor:Daniel Hurtado L&oacute;pez.</h6>
+			
+			<a  id="enlace" rel="license" href="http://creativecommons.org/licenses/by/4.0/">Esta obra está bajo una licencia de Creative Commos Reconocimiento 4.0 Internacional</a>
+			<img id="licencia" src="https://i.creativecommons.org/l/by/4.0/80x15.png" />
+			
+		
+		</div>
+	
+
+	
+	</body>
