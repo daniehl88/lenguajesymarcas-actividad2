@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!--Elementos simples-->
+    <xs:element name="numero" type="xs:positiveInteger"/>
+    <xs:element name="localidad" type="xs:string"/>
+    <xs:element name="provincia" type="xs:string"/>
+    <xs:element name="cantidad" type="xs:positiveInteger"/>
+    <xs:element name="nom_producto" type="xs:string"/>
+    <xs:element name="iva" type="xs:positiveInteger"/>
+    <xs:element name="nombre" type="xs:string"/>
+    <xs:element name="apellidos" type="xs:string"/>
+    <xs:element name="raz_social" type="xs:string"/>
+    <xs:element name="web" type="xs:string"/>
+    <xs:element name="fecha" type="xs:date"/>
+    <xs:element name="observaciones" type="xs:string"/>
+
+<!-- Elementos simples con restricciones  o facetas-->
+
+    <xs:element name="cp">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:length value="5"/>
+                <xs:pattern value="[0-9]{5}"/> <!-- En este fragmento se define una faceta al código postal de 5 dígitos-->
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="nif"> 
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:length value="10"/>
+                <xs:pattern value="[0-9]{8}-[A-Z]"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- En este frangmento se define  al elemento nif una faceta de 8 dígitos más guión y letra mayúscula-->
+    
+    <xs:element name="forma_pago">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="paypal"/>
+                <xs:enumeration value="bizum"/>
+                <xs:enumeration value="efectivo"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <!-- Este elemento solo puede contener los valores designados en la enumeración--> 
+
+    <xs:element name="cif">
+    <xs:simpleType>
+        <xs:restriction base="xs:string">
+            <xs:length value="9"/>
+            <xs:pattern value="[A-Z]{1}[0-9]{7}[A-Z]{1}"></xs:pattern>
+        </xs:restriction>
+    </xs:simpleType>
+    </xs:element>
+
+    <!-- En este  fragmento se define al elemento cif con una faceta de leta, más 7 dígitos, más letra-->
+
+    <xs:element name="precio">
+        <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+                <xs:fractionDigits value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="importe">
+        <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+                <xs:fractionDigits value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="subtotal">
+        <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+                <xs:fractionDigits value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <xs:element name="total">
+        <xs:simpleType>
+            <xs:restriction base="xs:decimal">
+                <xs:fractionDigits value="2"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+
+    <!-- Para los elementos precio,subtotal,importe y total se define idéntica faceta
+        en la cual se determina que es un número decimal con dos dígitos tras la coma-->
+       
+    <xs:element name="tipo_cliente">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="empresa"/>
+                <xs:enumeration value="particular"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>    
+    
+        
+<!-- Elementos simples pero complejos (con atributos)-->
+        <xs:element name="telefono">
+           <xs:complexType>
+               <xs:simpleContent>
+                   <xs:extension base="xs:string">
+                       <xs:attribute ref="tipo_telf" use="required"/>
+                   </xs:extension>
+               </xs:simpleContent>
+           </xs:complexType>
+        </xs:element>
+
+        <xs:element name ="via">
+            <xs:complexType>
+               <xs:simpleContent>
+                   <xs:extension base="xs:string">
+                       <xs:attribute ref="tipo_via" use="required"/>
+                   </xs:extension>
+               </xs:simpleContent>
+            </xs:complexType>
+        </xs:element>
+        
+
+
+<!-- Definición de atributos-->
+
+    <xs:attribute name="cod_cliente">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:length value="5"></xs:length>
+                <xs:pattern value="[A-z][0-9]{4}"></xs:pattern>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+    <!-- En este caso defino el atributo cod_cliente con una faceta compuestas por una letra y 4 números.-->
+
+    <xs:attribute name="tipo_via">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="avda"/>
+                <xs:enumeration value="calle"/>
+                <xs:enumeration value="crta"/>
+                <xs:enumeration value="paseo"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+    <xs:attribute name="tipo_telf"> 
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="particular"/>
+                <xs:enumeration value="direccion"/>
+                <xs:enumeration value="rrhh"/>
+                <xs:enumeration value="contabilidad"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+    <!-- Los atributos tipo_telf y tipo_via contienen una unica serie de valores admitidos-->
+
+    <xs:attribute name="num_factura">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:length value="11"></xs:length>
+                <xs:pattern value="[A-Z]{3}-[0-9]{2}-[0-9]{4}"></xs:pattern>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+
+    <!-- En este bloque se define la faceta a utilizar y cuyo valor determinará el usuario 
+    dependiendo de si el cliente es una empresa o un particular-->
+
+
+    <xs:attribute name="cod_producto">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:pattern value="[A-Z]{3}-[A-Z]{3}-[A-Z]{3}"/>
+                
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:attribute>
+    <!-- Este atributo define una faceta para el codigo de un producto (3letras-3letras-3letras)-->
+
+    <xs:attribute name="moneda" type="xs:string"/> <!-- Atributo simpre-->
+
+<!-- Elementos compuestos-->
+    
+<!-- Elemento principal (clientes)-->
+<xs:element name="clientes">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element ref="cliente" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>    
+    <!-- Elemento secundario (cliente)-->
+    <xs:element name="cliente">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="direccion"/>
+                <xs:element ref="telefono" minOccurs="0" maxOccurs="1"/> <!-- Con min occurs y max occurs en esos valores se define que este elemento es opcional-->
+                <xs:element ref="tipo_cliente"/>
+                <xs:element ref="contacto"/>
+                <xs:element ref="facturas"/>
+            </xs:sequence>
+            <xs:attribute ref="cod_cliente" use="required"/>
+        </xs:complexType>
+    </xs:element>
+        <!--Bloque de datos perteneciente a cliente, dirección-->
+            <xs:element name="direccion">
+                <xs:complexType>
+                    <xs:all>
+                        <xs:element ref="via"/>
+                        <xs:element ref="numero"/>
+                        <xs:element ref="localidad"/>
+                        <xs:element ref="provincia"/>
+                        <xs:element ref="cp"/>
+                    </xs:all>
+                </xs:complexType>
+            </xs:element>
+
+            <!--Bloque de datos perteneciente a cliente,contacto--> 
+            <xs:element name="contacto">
+                <xs:complexType>
+                   <xs:sequence>
+                       <xs:element ref="nombre"/>
+                       <xs:element ref="apellidos"/>
+                        <xs:choice>
+                            <xs:group ref="c_empresa"></xs:group>
+                            <xs:group ref="c_particular"></xs:group>    
+                        </xs:choice>
+                   </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+                
+            <xs:group name="c_empresa"> <!-- Definición del grupo de datos cliente empresa-->
+                <xs:sequence>
+                    <xs:element ref= "raz_social"/>
+                    <xs:element ref="web" minOccurs="0" maxOccurs="1"/><!-- Elemento opcional-->
+                    <xs:element ref="cif"/>
+                </xs:sequence>
+            </xs:group>
+
+            <xs:group name="c_particular"><!-- Definición del grupo de datos cliente particular-->
+                <xs:sequence>
+                    <xs:element ref="nif"/>
+                </xs:sequence>
+            </xs:group>
+
+            <!-- bloque de datos pertenenciente a cliente,facturas-->
+            <xs:element name="facturas">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="factura" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                </xs:element>
+
+                    <xs:element name="factura"> <!--Subloque de datos de facturas,factura-->
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="fecha"/>
+                                <xs:element ref="forma_pago"/>
+                                <xs:element ref="observaciones" minOccurs="0" maxOccurs="1"/>
+                                <xs:element ref="productos"/>
+                                <xs:element ref="cuantia"/>
+                            </xs:sequence>
+                                <xs:attribute ref="num_factura" use="required"/>
+                        </xs:complexType>
+                    </xs:element>
+
+
+                    <xs:element name="productos"> <!--Subloque de datos de factura,productos-->
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="producto" minOccurs="1" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+
+                            <xs:element name="producto"> <!-- Dentro del subloque productos-->
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element ref="cantidad"/>
+                                        <xs:element ref="nom_producto"/>
+                                        <xs:element ref="precio"/>
+                                        <xs:element ref="importe"/>
+                                    </xs:sequence>
+                                        <xs:attribute ref="cod_producto" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+
+                    <xs:element name="cuantia"> <!-- Subloque de datos de factura, cuantia-->
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="subtotal"/>
+                            <xs:element ref="iva"/>
+                            <xs:element ref="total"/>
+                        </xs:sequence>
+                            <xs:attribute ref="moneda" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+
+
+
+</xs:schema>
