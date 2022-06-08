@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clientes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="actividad3.xsd">
+    <cliente cod_cliente="C2022">
+        <direccion>
+            <via tipo_via="calle">Alfonso XVII</via>
+            <numero>13</numero>
+            <localidad>Bornos</localidad>
+            <provincia>Cadiz</provincia>
+            <cp>11678</cp>
+        </direccion>
+        <telefono tipo_telf="direccion">956212122</telefono>
+        <tipo_cliente>empresa</tipo_cliente>
+        <contacto>
+            <nombre>Juan</nombre>
+            <apellidos>Gómez Perez</apellidos>
+            <raz_social>Tecnotron</raz_social>
+            <web>www.tecnotron.es</web>
+            <cif>R1234568K</cif>
+        </contacto>
+        <facturas>
+            <factura num_factura="EMP-19-2022">
+                <fecha>2022-01-10</fecha>
+                <forma_pago>bizum</forma_pago>
+                <observaciones>Ingreso en cuenta antes de servir</observaciones>
+                <productos>
+                    <producto cod_producto="FIT-FER-ABO">
+                        <cantidad>10</cantidad>
+                        <nom_producto>Fertilizante</nom_producto>
+                        <precio>12.0</precio>
+                        <importe>120</importe>
+                    </producto>
+                </productos>
+                <cuantia moneda="eur">
+                    <subtotal>120.0</subtotal>
+                    <iva>21</iva>
+                    <total>145.2</total>
+                </cuantia>
+
+            </factura>
+        </facturas>
+        
+    </cliente>
+
+    <cliente cod_cliente="K2022">
+        <direccion>
+            <via tipo_via="avda">Los descubrimientos</via>
+            <localidad>Chiclana</localidad>
+            <cp>15001</cp>
+            <provincia>Cadiz</provincia>
+            <numero>11</numero>
+        </direccion>
+        <telefono tipo_telf="particular">956214151</telefono>
+        <tipo_cliente>particular</tipo_cliente>
+        <contacto>
+            <nombre>Genaro</nombre>
+            <apellidos>Romero Gutierrez</apellidos>
+            <nif>75758965-J</nif>
+        </contacto>
+        <facturas>
+            <factura num_factura="PAR-10-2021">
+                <fecha>2021-10-10</fecha>
+                <forma_pago>efectivo</forma_pago>
+                <observaciones>Pago al recibir</observaciones>
+                <productos>
+                    <producto cod_producto="PLA-INT-GER">
+                        <cantidad>10</cantidad>
+                        <nom_producto>Geranio</nom_producto>
+                        <precio>5</precio>
+                        <importe>50</importe>
+                    </producto>
+                    <producto cod_producto="PLA-EXT-CAR">
+                        <cantidad>3</cantidad>
+                        <nom_producto>Carnegiea</nom_producto>
+                        <precio>10.0</precio>
+                        <importe>30.0</importe>
+                    </producto>
+                </productos>
+                <cuantia moneda="eur">
+                    <subtotal>80</subtotal>
+                    <iva>21</iva>
+                    <total>96.8</total>
+                </cuantia>
+            </factura>
+            <factura num_factura="PAR-10-2021">
+                <fecha>2021-12-10</fecha>
+                <forma_pago>paypal</forma_pago>
+                <productos>
+                    <producto cod_producto="PLA-EXT-ABT">
+                        <cantidad>10</cantidad>
+                        <nom_producto>Abeto</nom_producto>
+                        <precio>15</precio>
+                        <importe>1500</importe>
+                    </producto>
+            
+                </productos>
+                <cuantia moneda="eur">
+                    <subtotal>1500</subtotal>
+                    <iva>21</iva>
+                    <total>1800</total>
+                </cuantia>
+                
+
+
+            </factura>
+
+        </facturas>
+
+    </cliente>
+
+
+
+
+
+</clientes>
