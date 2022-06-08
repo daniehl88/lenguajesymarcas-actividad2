@@ -1,0 +1,43 @@
+<!ELEMENT clientes (cliente)+><!-- Elemento raíz o principal que contiene 1 o varios clientes-->
+<!ELEMENT cliente (direccion, telefono*, tipo_cliente, contacto, facturas)>
+<!-- Como no tiene que haber necesariamente un teléfono se establece el * como 0 o más apariciones-->
+    <!ATTLIST cliente cod CDATA #REQUIRED> <!-- Atributo de cliente-->
+    <!ELEMENT direccion (via,numero,localidad,provincia,cp)>
+        <!ELEMENT via (#PCDATA)>
+            <!ATTLIST via tipo (calle|avda|crta|paseo) #REQUIRED>
+            <!-- El atributo via debe elegir entre algunos de esos valores representados en paréntesis y con el operador "or"-->
+        <!ELEMENT numero (#PCDATA)>
+        <!ELEMENT localidad (#PCDATA)>
+        <!ELEMENT provincia (#PCDATA)>
+        <!ELEMENT cp (#PCDATA)>
+    <!ELEMENT telefono (#PCDATA)> <!-- En el caso de aparecer el atributo definirá el tipo de teléfono-->
+        <!ATTLIST telefono tipo_telf (direccion|rrhh|particular|contabilidad) #REQUIRED>
+    <!ELEMENT tipo_cliente (#PCDATA)>
+    <!ELEMENT contacto (nombre,apellidos,((raz_social,web,cif)|(nif)))> <!--Existen dos bloques a escoger dependiendo de si el cliente es empresa o particular-->
+        <!ELEMENT nombre (#PCDATA)> <!-- Elemento común-->
+        <!ELEMENT apellidos (#PCDATA)> <!-- Elemento común-->
+        <!ELEMENT raz_social (#PCDATA)> <!-- Elemento específico-->
+        <!ELEMENT web (#PCDATA)> <!-- Elemento específico-->
+        <!ELEMENT cif (#PCDATA)> <!-- Elemento específico-->
+        <!ELEMENT nif (#PCDATA)> <!-- Elemento específico-->
+    <!ELEMENT facturas (factura)+> <!--Como cada cliente debe tener una factura mínimo y puede tener varias se le agrega la condición + al dtd-->
+        <!ELEMENT factura (fecha,forma_pago,observaciones?,productos,cuantia)> <!-- En este caso como las observaciones son un elemento opcional lleva el simbolo ?-->
+            <!ATTLIST factura num_factura CDATA #REQUIRED>
+            <!ELEMENT fecha (#PCDATA)>
+            <!ELEMENT forma_pago (#PCDATA)>
+            <!ELEMENT observaciones (#PCDATA)>
+            <!ELEMENT productos (producto)+> <!-- Al igual que con el elemento cliente dentro de cada factura se pueden hacer varias compras por eso producto tiene  este símbolo-->
+                <!ELEMENT producto (cantidad,nom_producto,precio,importe)> <!-- Se añade dentro del producto un nuevo elemento "importe"-->
+                    <!ATTLIST producto cod_producto CDATA #REQUIRED>
+                    <!ELEMENT cantidad (#PCDATA)>   
+                    <!ELEMENT nom_producto (#PCDATA)>
+                    <!ELEMENT precio (#PCDATA)>
+                    <!ELEMENT importe (#PCDATA)> <!-- Viene a ser la multiplicación de la cantidad de un producto por su precio te da el importe de ese producto-->
+            <!ELEMENT cuantia (subtotal,iva,total)> <!--Viene a ser el elemento final de la factura-->
+                <!ATTLIST cuantia moneda CDATA #REQUIRED> <!-- Este atributo especifica la moneda en que se imprime la factura-->
+                <!ELEMENT subtotal (#PCDATA)> <!-- La suma de todos los importes de los productos-->
+                <!ELEMENT iva (#PCDATA)> <!-- El iva que se aplica-->
+                <!ELEMENT total (#PCDATA)>  <!-- El valor final de la factura con el iva aplicado-->          
+
+
+            
