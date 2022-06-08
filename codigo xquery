@@ -1,0 +1,284 @@
+(: Ejercicio 1 :)
+(: Obtener el nombre y salario de los empleados que cobren entre 500 y 1450 € (ambos incluidos).
+Resultado: 
+<empleado>
+   <nombre>Pepe</nombre>
+   <salario unidad="Euros">1100</salario>
+</empleado>
+<empleado>
+   <nombre>Víctor</nombre>
+   <salario unidad="Euros">500</salario>
+</empleado>
+<empleado>
+   <nombre>Luisa</nombre>
+   <salario unidad="Euros">1450</salario>
+</empleado>
+<empleado>
+   <nombre>Pedro</nombre>
+   <salario unidad="Euros">1050</salario>
+</empleado>
+<empleado>
+   <nombre>Andrés</nombre>
+   <salario unidad="Euros">700</salario>
+</empleado>
+:)
+
+for $a in //empleados/empleado
+let $b := $a/nombre
+let $c := $a/salario
+where $c >= 500 and $c <= 1450
+return
+<empleado>
+    {$b,$c}
+</empleado>
+
+,
+
+(: Ejercicio 2 :)
+(: Obtener el nombre y el teléfono de todos los clientes que han comprado, uno o dos productos de "Teclado" (No sabemos su código, sólo el nombre del producto)
+Resultado: 
+<cliente>
+   <nombre>Pedro Rojas</nombre>
+   <telefono>607234125</telefono>
+</cliente>
+<cliente>
+   <nombre>Pedro Rodríguez</nombre>
+   <telefono>608822173</telefono>
+</cliente>
+:)
+
+let $resultado :=(
+  let $a := //cliente
+  for $b in //producto
+  for $c in //cantidad
+  let $d := $b[nombre ='Teclado']/@cod
+  let $e := $c[@producto=$d]
+  let $x := $a[@cod = $c/@cliente]
+  let $nombre := $x/nombre
+  let $telefono := $x/telefono
+  where $e =1 or $e= 2
+  return
+  <cliente>
+  {$x/nombre,$x/telefono}
+  </cliente>
+  
+  
+)return $resultado
+
+,
+
+(: Ejercicio 3 :)
+(: Obtener los nombres de todos los productos, ordenados primero por precio (de menor a mayor) y luego por orden alfabético ascendente.
+Resultado:
+<nombre>Ratón</nombre>
+<nombre>Kit soldadura</nombre>
+<nombre>Teclado</nombre>
+<nombre>Disco duro SSD</nombre>
+<nombre>NAS</nombre>
+<nombre>Apple mini</nombre>
+:)
+
+for $m in //productos/producto
+  let $a := $m/nombre
+  let $b := $m/precio
+order by $b, $a
+return
+
+,
+
+(: Ejercicio 4 :)
+(: Obtener (usando let) el número total de empleados y el salario total que tiene que pagarles la empresa en 5 años.
+Resultado:
+<totales>
+   <empleados>7</empleados>
+   <salario_5annos moneda="EUR">41000</salario_5annos>
+</totales>
+:)
+
+let $a := count(//empleados/empleado)
+let $b := sum(//empleados/empleado/salario)
+return
+<totales>
+   <empleados>{$a}</empleados>
+   <salario_5annos moneda="EUR">{$b*5}</salario_5annos>
+</totales>
+,
+
+
+(: Ejercicio 5 :)
+(: Obtener el nombre de los productos que han sido comprados en total más de 5 veces, su precio unitario, el número de productos vendidos, así como el valor total de esas ventas en €. 
+Resultado:
+<producto>
+   <nombre>Disco duro SSD</nombre>
+   <precio moneda="EUR">320</precio>
+   <ventas>14</ventas>
+   <total moneda="EUR">4480</total>
+</producto>
+<producto>
+   <nombre>Teclado</nombre>
+   <precio moneda="EUR">30</precio>
+   <ventas>6</ventas>
+   <total moneda="EUR">180</total>
+</producto>
+:)
+
+let $resultado := (
+    for $a in //producto
+    let $b := sum(//cantidad[@producto=$a/@cod])
+    let $c := $a/@cod 
+    let $nombre := //producto[@cod = $c]/nombre
+    let $precio := //producto[@cod =$c]/precio
+  where $b > 5
+    return
+    <producto>
+        {$nombre,$precio}
+        <ventas>{$b}</ventas>
+        <total moneda="EUR">{$precio*$b}</total>
+    </producto>
+)return
+$resultado
+
+,
+
+
+(: Ejercicio 6 :)
+(: Obtener el nombre del curso con el menor número de plazas, el precio del curso más caro y el salario el empleado que más cobra. 
+Resultado:
+<curso>
+   <menos_plazas>RPAS</menos_plazas>
+   <mas_caro moneda="EUR">749</mas_caro>
+   <mayor_salario moneda="EUR">1800</mayor_salario>
+</curso>
+:)
+
+(:Curso menos plazas:)
+for $plazas in min(//curso/plazas)
+let $a := //curso[plazas=$plazas]/nombre/text()
+
+(:Curso más caro:)
+for $precioCaro in max(//curso/precio)
+
+(:Empleado que más cobra:)
+for $Salario in max(//empleado/salario)
+
+return
+<curso>
+   <menos_plazas>{$a}</menos_plazas>
+   <mas_caro moneda="EUR">{$precioCaro}</mas_caro>
+   <mayor_salario moneda="EUR">{$Salario}</mayor_salario>
+</curso>
+	
+,
+
+(: Ejercicio 7 :)
+(: Obtener, usando let, la suma (en €) de los salarios de los empleados que viven en las provincias de Granada o Sevilla o tienen código B o C, excepto los que viven en las capitales. 
+Estructura:
+<total_salarios moneda="EUR">XXXX</total_salarios>
+:) 
+
+
+(:Seleccionamos empleados que viven en las provincias de Granada o Sevilla:)
+
+let $a := //empleado[contains(provincia,'Granada') or contains(provincia,'Sevilla')]/nombre
+
+(:Seleccionamos los empleados de estas provincias que no vivan en la capital:)
+let $b := //empleado[not(contains(localidad,'Granada')) and not(contains(localidad,'Sevilla'))]/nombre
+
+(:Se unen los datos:)
+let $c := //empleado[nombre=$a and nombre=$b]/nombre
+
+(:Se suman los salarios que coincidan con el nombre:)
+let $d := sum(//empleado[nombre=$c]/salario)
+return
+<total_salarios moneda="EUR">{$d}</total_salarios>
+
+,
+
+(: Ejercicio 8 :)
+(: Obtener los nombres completos de todos los profesores cuyo apellido acaben en "ez", eliminando los repetidos e indicar todas las aulas en la que da clase. Ordenar por nombre desde el más largo hasta el más corto. 
+Resultado:
+<profesor>
+   <nombre>Manuel Antonio Rodriguez</nombre>
+   <aula>1</aula>
+</profesor>
+<profesor>
+   <nombre>Aitor Gómez</nombre>
+   <aula>2</aula>
+   <aula>1</aula>
+</profesor>
+:)
+
+for $profesor in distinct-values(//curso[ends-with(profesor,'ez')]/profesor)
+let $aula := //curso[profesor=$profesor]/aula
+order by string-length($profesor) descending
+return
+<profesor>
+   <nombre>{$profesor}</nombre>
+   {$aula}
+</profesor>
+
+,
+
+
+(: Ejercicio 9 :)
+(: Obtener la media de los precios de todos los cursos, la suma de los precios de los cursos de la sala 1, el total de plazas que oferta el profesor "Aitor Gómez" en todos sus cursos.
+Estructura:
+<cursos>
+   <media moneda="EUR">XXX.X</media>
+   <total_aula1 moneda="EUR">XXX</total_aula1>
+   <plazas_Aitor_Gomez>XX</plazas_Aitor_Gomez>
+</cursos>
+:)
+
+
+(:----Media de los precios de todos los cursos:)
+let $curso := //curso/precio/text()
+let $media := avg($curso)
+
+(:Suma de los precios de la sala 1:)
+let $sala1 := //curso[aula=1]/precio/text()
+let $sumaSala1 := sum($sala1)
+
+(:El total de plazas que oferta Aitor Gómez en sus cursos:)
+let $aitor := //curso[profesor='Aitor Gómez']/plazas
+let $sumaPlazas := sum($aitor)
+
+(:--------------salida de resultados-------:)
+
+return
+<cursos>
+   <media moneda="EUR">{$media}</media>
+   <total_aula1 moneda="EUR">{$sumaSala1}</total_aula1>
+   <plazas_Aitor_Gomez>{$sumaPlazas}</plazas_Aitor_Gomez>
+</cursos>
+
+, 
+
+(: Ejercicio 10 :)
+(: Obtener el nombre del curso más largo y quién lo imparte, así como su precio sin iva y el precio con un iva del 21% y el total en € que genera el curso si se ocupan todas sus plazas.
+Estructura:
+<curso>
+   <nombre>XXX</nombre>
+   <profesor>XXX</profesor>
+   <precio cuota="Mensual" moneda="EUR">XXX</precio>
+   <precio_conIVA moneda="EUR">XXX.XX</precio_conIVA>
+   <total_curso moneda="EUR">XXXX</total_curso>
+</curso>
+:)
+
+(for $curso in //curso
+let $fechaInicio := $curso/comienzo/concat(substring(.,1,4),'-',substring(.,5,2),'-',substring(.,7,2))
+let $fechaFin := $curso/fin/concat(substring(.,1,4),'-',substring(.,5,2),'-',substring(.,7,2))
+let $duracion := days-from-duration(xs:date($fechaFin)- (xs:date($fechaInicio)))
+let $precioIva := $curso/precio/text()*1.21
+let $precioTotal := $curso/plazas/text() * $precioIva
+order by $duracion descending
+
+ return
+      <curso>
+      <nombre>{$curso/nombre/text()}</nombre>
+      <profesor>{$curso/profesor/text()}</profesor>
+      <precio cuota="Mensual" moneda="EUR">{$curso/precio/text()}</precio>
+      <precio_conIVA moneda="EUR">{$precioIva}</precio_conIVA>
+       <total_curso moneda="EUR">{$precioTotal}</total_curso>
+      </curso>)[1]
