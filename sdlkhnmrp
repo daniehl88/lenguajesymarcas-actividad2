@@ -1,0 +1,227 @@
+body{background-color: rgba(181, 255, 171, 0.555);} /*Establece el color de fondo de la página*/
+	#header{ position:absolute; width:30cm; height:6cm;margin:0.5cm; border-color:transparent; border-style:solid; } /*Las dimensiones y atributos de la cabecera*/
+		#logotipo{ margin:0.5cm;height:151px; width:151px; border-style:solid; border-color:transparent; } /*Características del contenedor del logotipo*/
+			#logo { height:150px; width:150px;  } /*Las características propias del logotipo*/
+
+
+		#nav{position:relative;left:300px; top:-140px;height:1.2cm;width:12.5cm;border-style:solid; border-color:transparent; } /*Este es el contenedor de los botones de navegación*/
+
+			#nvinicio,#nvproductos,#nvformacion,#nvcita{
+				/*Estas son las propiedades de los botones de navegación*/		
+				margin:0.5px;		
+				height:1.15cm;
+				width:3cm;
+				border-style:solid; 
+				border-color:goldenrod;
+				border-width:2px; 
+				background-color:#01F1F5;
+				font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+				font-size:16px; 
+				color:goldenrod;
+			}
+				/*Estos son los efectos visuales de los botones de navegación*/
+				#nvinicio:hover,#nvproductos:hover,#nvformacion:hover,#nvcita:hover{
+					background-color:red;
+					border-color:#F5EE0B;
+					border-style:solid;
+					color:blueviolet;
+				}
+	#main{position:absolute;display:block; top:6.7cm; height: 19.6cm; width:30cm; margin:0.5cm; border-style: solid; border-color:transparent; } /*Atributos de contenido principal*/
+		#inicio{position:relative;display:block; height: 18.7cm; width: 29cm;  border-style:solid;border-color:transparent; margin:14px;  }	/*Apartado inicio*/	
+				#banner{
+					display: block;
+					position:absolute;
+					margin:14px 200px 10px 250px;
+					height: 200px;
+					width: 600px;
+					z-index: 100;	
+				} /*Propiedades del baner y la capa presentación*/
+				#presentacion{
+					position: absolute;
+					display: block;
+					top: 58mm;
+					height: 3.25cm;
+					width: auto;
+					margin:5mm;
+					padding: 6mm;
+					border-style: dotted; 
+					border-color:transparent;
+					text-align: justify;
+					font-size: large;
+					font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+					color:goldenrod;
+					
+					
+				}
+				
+				#lista{
+					/*Propiedades de la lista ordenada*/	
+						position:absolute;
+						display: inline;
+						top: 110mm;
+						left:300px;
+						margin:auto;
+						width: auto;
+					   	border-style:dotted; 
+						border-color:transparent;
+						list-style-type:decimal;
+						font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+						font-size: x-large;
+						text-align: center;
+						color:goldenrod;
+					}
+
+						#sublist1,#sublist2{ list-style-type:lower-latin} /*Estos son los atributos de las sublistas dentro de la principal*/
+	
+						
+		#productos{position:relative;display:none;height: 18.7cm; width: 29cm; margin:14px; border-style:solid;border-color:transparent; 
+						text-align: center;  } /*Capa productos*/
+
+				#titulo_productos{
+				
+				position: relative;
+				margin: 5mm;
+				font-size: xx-large;
+				font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+				color:goldenrod;	
+				}	
+				
+				#tabla_productos{
+					position:inline;
+					display:inline-table;
+					width: 340px;
+					height: 600px;
+					margin:5mm 30% auto 30%;
+					border-style: solid;
+					border-width: 5px;
+					border-color:transparent;	
+				}/*Contine las características de la tabla contenedora de imágenes*/
+					td{border-color:goldenrod;border-style: solid;} /*contiene características genéricas de las celdas de la tabla*/
+						#imagen1,#imagen2,#imagen3,#imagen4{
+							height: 180px;
+							width: 190px;
+							text-align: center;
+						}/*Propiedades de las imágenes*/
+						#imagen1:hover,#imagen2:hover,#imagen3:hover,#imagen4:hover{-webkit-transform: scale(1.6);transform:scale(1.6);} /*efectos de imagen*/
+
+						#timg1,#timg2,#timg3,#timg4{ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:medium; 
+														color:goldenrod;}/*Identificadores de las imágenes*/
+
+						#cimg1,#cimg2,#cimg3,#cimg4{ text-align: center;} /*propiedades específicas de las celdas de la tabla*/
+	
+		#formacion{position:relative;display:none;height: 18.7cm; width: 29cm;margin:14px; border-style:solid;border-color:transparent;} /*capa formación*/
+
+			#formacion_titulo{position:inline;display:block;margin:auto;text-align:center;font-size:85px;
+										font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color: goldenrod;}	/*rótulo*/	
+
+			#tabla_horarios{position:relative;display:table; top:200px; height:auto; width:auto;margin:auto;overflow:hidden;  
+							border-style: solid;border-collapse:collapse;border-color:goldenrod;  text-align:center;font-size:x-large;	
+								font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color:goldenrod} /*La tabla contendeora de horarios*/
+
+						#a,#b,#c,#d{
+							border-style: solid;
+							border-color:goldenrod;
+							padding: 8px;
+						} /*Propiedades específicas de la tabla horarios*/
+		
+		#cita_previa{position:absolute;display:none; height: 18.7cm; width: 29cm; margin:14px; border-style:solid;border-color:transparent;}	/*Capa cita previa*/		
+			
+			#cita_titulo{position:relative;display: inline;margin: 0.5cm; font-size: 48px;
+						font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;color:goldenrod; top:0.5cm;} /*Título*/
+			
+			#imagencita{position:relative;display:block; margin:0.5cm; height: 150px; width: 150px;} /*Propiedades del logo*/
+
+			#formulario{position: relative;display:block;top:-200px; left:450px; width: 600px; height:500px;border-style: dotted;border-color:transparent;} /*Propiedades generales de formulario*/
+				
+				.etiquetas{
+					position:relative;
+					display:block;
+					left:-150px;
+					margin:auto;
+					width:240px;
+					height:30px;
+					color:goldenrod;
+					font-size: larger;
+					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+					text-align: left;
+					border-style: solid;
+					border-color:transparent;
+
+				} /*Etiquetas identificadoras de las distintas entradas de datos*/
+				.entradas{
+					position:relative;
+					display: block;
+					margin:auto;
+					left:150px;
+					top:-270px;
+					height: 30px;
+					width: 290.33px;
+					border-style: solid;
+					border-color:goldenrod;
+					font-size:medium;
+					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+					color:goldenrod;
+					background-color: ghostwhite;	
+				}/*Camos de entrada de datos*/
+
+				.etiqueta_comentario{
+					position: relative;
+					display:inline-block;
+					top:-200px;
+					left:20px;
+					height: 30px;
+					width: 240px;
+					margin: auto;
+					border-style: solid;
+					border-color:transparent;
+					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+					font-size:larger;
+					text-align: center;
+					color:goldenrod;
+
+				}/*Propiedades de la etiqueta identificadora del campo comentarios*/
+
+				.comentarios{
+					position:relative;
+					display:block;
+					border-style: solid;
+					top: -195px;
+					left: 20px;
+					border-color:goldenrod;
+					background-color: ghostwhite;
+					
+				} /*Entrada de datos del campo comentarios*/
+
+				.boton_enviar{
+					position: relative;
+					display: block;
+					margin:auto;
+					top: -100px;
+					display: block;
+					background-color: aqua;
+					color:goldenrod;
+					border-color:goldenrod;
+					font-size: x-large;
+					font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+				} /*Propiedades del boton enviar que cierra el formulario*/
+					
+
+
+	#footer{position:absolute; top:1000px;height:4cm;width:30cm;margin:1cm auto auto 0.5cm; border-style:solid; border-color:transparent;} /*Capa pie*/
+		
+				/*Propiedades y características del texto*/
+
+		#footex{position:absolute; margin:0.2cm; border-style:solid; border-color:transparent; font-size:18px; font-family:Helvetica; 
+					font-Style:italic; color:gray;}
+			
+					/*Propiedades del titulo "autor"*/
+
+		h6{position:absolute; margin:0.2cm; border-style:solid; border-color:transparent;top:60px;font-family:Helvetica; 
+				font-Style:bold; color:black; font-size:medium;}	
+
+				/*Propiedades del enlace y la licencia creative commons*/
+
+		#enlace{position:absolute; margin:0.2cm; border-style:solid; border-color:transparent; top:110px; width:15cm; height:24px; 
+					font-style:cursive; font-family:"Bauhaus 93"; font-size:small;}
+		
